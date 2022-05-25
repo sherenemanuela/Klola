@@ -29,10 +29,7 @@ namespace Klola
 
         private void getTransactionTable()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand("SELECT * FROM Bill", connection.getConnection()));
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            historyDataGrid.DataSource = table;
+            historyDataGrid.DataSource = connection.getDataTable("SELECT * FROM Bill");
         }
 
         private void eksporBtn_Click(object sender, EventArgs e)

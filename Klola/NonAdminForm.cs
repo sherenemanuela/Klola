@@ -21,6 +21,11 @@ namespace Klola
         public NonAdminForm()
         {
             InitializeComponent();
+            createActiveBar();
+        }
+
+        private void createActiveBar()
+        {
             activeBar = new Panel();
             activeBar.Size = new Size(10, 68);
             menuPanel.Controls.Add(activeBar);
@@ -37,7 +42,6 @@ namespace Klola
                 activeBar.Visible = true;
                 activeBar.BringToFront();
             }
-
         }
 
         private void disableButton()
@@ -78,7 +82,6 @@ namespace Klola
             formPanel.Controls.Add(selectedForm);
             selectedForm.BringToFront();
             selectedForm.Show();
-
         }
 
         private void exitBtn_Click(object sender, EventArgs e)

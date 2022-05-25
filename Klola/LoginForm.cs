@@ -39,19 +39,24 @@ namespace Klola
         {
             if (!credentialsIsEmpty())
             {
-                if (UserComboBox.SelectedItem.ToString() == "Admin" && isAdmin())
-                {
-                    AdminForm adminForm = new AdminForm();
-                    adminForm.Show();
-                    this.Hide();
-                }
-                else if (UserComboBox.SelectedItem.ToString() == "Seller" && isSeller())
-                {
-                    sellerId = usernameBox.Text;
-                    NonAdminForm sellerForm = new NonAdminForm();
-                    sellerForm.Show();
-                    this.Hide();
-                }
+                showNextPage();
+            }
+        }
+
+        private void showNextPage()
+        {
+            if (UserComboBox.SelectedItem.ToString() == "Admin" && validateAdmin())
+            {
+                AdminForm adminForm = new AdminForm();
+                adminForm.Show();
+                this.Hide();
+            }
+            else if (UserComboBox.SelectedItem.ToString() == "Penjual" && validateSeller())
+            {
+                sellerId = usernameBox.Text;
+                NonAdminForm sellerForm = new NonAdminForm();
+                sellerForm.Show();
+                this.Hide();
             }
         }
 
@@ -59,7 +64,7 @@ namespace Klola
         {
             if (usernameBox.Text == "" || passwordBox.Text == "")
             {
-                MessageBox.Show("Username dan password tidak boleh kosong!", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Username dan password tidak boleh kosong!", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return true;
             }
             else if (UserComboBox.SelectedIndex <= -1)
@@ -71,27 +76,35 @@ namespace Klola
                 return false;
         }
 
-        private Boolean isSeller()
+        private Boolean validateSeller()
         {
-            DatabaseConnection connection = new DatabaseConnection();
+            if (!validateUsername())
+                return false;
 
-            string selectQuery = "SELECT * FROM Seller WHERE SellerId LIKE'" + usernameBox.Text +
+            string query = "SELECT * FROM Seller WHERE SellerId LIKE'" + usernameBox.Text +
                 "' AND SellerPassword LIKE '" + passwordBox.Text + "'";
 
-            SqlDataAdapter adapter = new SqlDataAdapter(selectQuery, connection.getConnection());
-
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-
+            DatabaseConnection connection = new DatabaseConnection();
+            DataTable table = connection.getDataTable(query);
 
             if (table.Rows.Count > 0)
                 return true;
-
+            
             MessageBox.Show("Username atau password salah!", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false;
         }
 
-        private Boolean isAdmin()
+        private Boolean validateUsername()
+        {
+            if (usernameBox.Text.Length != 4 || usernameBox.Text.First() != 'S')
+            {
+                MessageBox.Show("Username salah!\nUsername merupakan ID penjual yang terdiri dari huruf 'S' diikuti dengan 3 angka. Contoh : S001", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validateAdmin()
         {
             if (usernameBox.Text == "Admin" && passwordBox.Text == "Admin123")
                 return true;
