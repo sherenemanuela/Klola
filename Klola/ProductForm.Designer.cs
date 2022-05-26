@@ -30,7 +30,11 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label1 = new System.Windows.Forms.Label();
+            this.categoryComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
+            this.quantityBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.priceBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.productDataGrid = new System.Windows.Forms.DataGridView();
             this.hapusBtn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.ubahBtn = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -40,25 +44,82 @@
             this.idBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.quantityBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.priceBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.categoryComboBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.productDataGrid)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.categoryComboBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // categoryComboBox
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(45, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(253, 44);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Kelola Produk";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.categoryComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.categoryComboBox.DropBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuInner;
+            this.categoryComboBox.DropDownWidth = 50;
+            this.categoryComboBox.Location = new System.Drawing.Point(212, 220);
+            this.categoryComboBox.Margin = new System.Windows.Forms.Padding(0);
+            this.categoryComboBox.Name = "categoryComboBox";
+            this.categoryComboBox.Size = new System.Drawing.Size(220, 40);
+            this.categoryComboBox.StateCommon.ComboBox.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.categoryComboBox.StateCommon.ComboBox.Border.Rounding = 20;
+            this.categoryComboBox.StateCommon.ComboBox.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.categoryComboBox.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.categoryComboBox.StateCommon.ComboBox.Content.Padding = new System.Windows.Forms.Padding(20, 5, 5, 5);
+            this.categoryComboBox.StateCommon.DropBack.Color1 = System.Drawing.Color.White;
+            this.categoryComboBox.TabIndex = 54;
+            this.categoryComboBox.SelectionChangeCommitted += new System.EventHandler(this.categoryComboBox_SelectionChangeCommitted);
+            // 
+            // quantityBox
+            // 
+            this.quantityBox.Location = new System.Drawing.Point(663, 168);
+            this.quantityBox.Name = "quantityBox";
+            this.quantityBox.Size = new System.Drawing.Size(220, 40);
+            this.quantityBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.quantityBox.StateCommon.Border.Rounding = 20;
+            this.quantityBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.quantityBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quantityBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
+            this.quantityBox.TabIndex = 53;
+            this.quantityBox.Tag = "";
+            // 
+            // priceBox
+            // 
+            this.priceBox.Location = new System.Drawing.Point(663, 115);
+            this.priceBox.Name = "priceBox";
+            this.priceBox.Size = new System.Drawing.Size(220, 40);
+            this.priceBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.priceBox.StateCommon.Border.Rounding = 20;
+            this.priceBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.priceBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.priceBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
+            this.priceBox.TabIndex = 52;
+            this.priceBox.Tag = "";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(470, 177);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(186, 27);
+            this.label5.TabIndex = 51;
+            this.label5.Text = "Kuantitas Produk";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(470, 124);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(151, 27);
+            this.label6.TabIndex = 50;
+            this.label6.Text = "Harga Produk";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // productDataGrid
             // 
@@ -88,7 +149,7 @@
             this.productDataGrid.RowHeadersWidth = 51;
             this.productDataGrid.RowTemplate.Height = 24;
             this.productDataGrid.Size = new System.Drawing.Size(839, 331);
-            this.productDataGrid.TabIndex = 34;
+            this.productDataGrid.TabIndex = 49;
             this.productDataGrid.Click += new System.EventHandler(this.productDataGrid_Click);
             // 
             // hapusBtn
@@ -128,7 +189,7 @@
             this.hapusBtn.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.hapusBtn.TabIndex = 33;
+            this.hapusBtn.TabIndex = 48;
             this.hapusBtn.Values.Text = "Hapus";
             this.hapusBtn.Click += new System.EventHandler(this.hapusBtn_Click);
             // 
@@ -169,7 +230,7 @@
             this.ubahBtn.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.ubahBtn.TabIndex = 32;
+            this.ubahBtn.TabIndex = 47;
             this.ubahBtn.Values.Text = "Ubah";
             this.ubahBtn.Click += new System.EventHandler(this.ubahBtn_Click);
             // 
@@ -210,7 +271,7 @@
             this.tambahBtn.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.tambahBtn.TabIndex = 31;
+            this.tambahBtn.TabIndex = 46;
             this.tambahBtn.Values.Text = "Tambahkan";
             this.tambahBtn.Click += new System.EventHandler(this.tambahBtn_Click);
             // 
@@ -221,7 +282,7 @@
             this.label4.Location = new System.Drawing.Point(48, 229);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 27);
-            this.label4.TabIndex = 29;
+            this.label4.TabIndex = 45;
             this.label4.Text = "Kategori";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -237,7 +298,7 @@
             this.nameBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.nameBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.nameBox.TabIndex = 28;
+            this.nameBox.TabIndex = 44;
             this.nameBox.Tag = "";
             // 
             // idBox
@@ -252,7 +313,7 @@
             this.idBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.idBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.idBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.idBox.TabIndex = 27;
+            this.idBox.TabIndex = 43;
             this.idBox.Tag = "";
             // 
             // label3
@@ -262,7 +323,7 @@
             this.label3.Location = new System.Drawing.Point(48, 177);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(151, 27);
-            this.label3.TabIndex = 26;
+            this.label3.TabIndex = 42;
             this.label3.Text = "Nama Produk";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -273,87 +334,24 @@
             this.label2.Location = new System.Drawing.Point(48, 124);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 27);
-            this.label2.TabIndex = 25;
+            this.label2.TabIndex = 41;
             this.label2.Text = "ID Produk";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // quantityBox
+            // label1
             // 
-            this.quantityBox.Location = new System.Drawing.Point(663, 168);
-            this.quantityBox.Name = "quantityBox";
-            this.quantityBox.Size = new System.Drawing.Size(220, 40);
-            this.quantityBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.quantityBox.StateCommon.Border.Rounding = 20;
-            this.quantityBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.quantityBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quantityBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.quantityBox.TabIndex = 38;
-            this.quantityBox.Tag = "";
-            // 
-            // priceBox
-            // 
-            this.priceBox.Location = new System.Drawing.Point(663, 115);
-            this.priceBox.Name = "priceBox";
-            this.priceBox.Size = new System.Drawing.Size(220, 40);
-            this.priceBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.priceBox.StateCommon.Border.Rounding = 20;
-            this.priceBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.priceBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.priceBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.priceBox.TabIndex = 37;
-            this.priceBox.Tag = "";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(470, 177);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(186, 27);
-            this.label5.TabIndex = 36;
-            this.label5.Text = "Kuantitas Produk";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(470, 124);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(151, 27);
-            this.label6.TabIndex = 35;
-            this.label6.Text = "Harga Produk";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // categoryComboBox
-            // 
-            this.categoryComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.categoryComboBox.DropBackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.ContextMenuInner;
-            this.categoryComboBox.DropDownWidth = 50;
-            this.categoryComboBox.Location = new System.Drawing.Point(212, 220);
-            this.categoryComboBox.Margin = new System.Windows.Forms.Padding(0);
-            this.categoryComboBox.Name = "categoryComboBox";
-            this.categoryComboBox.Size = new System.Drawing.Size(220, 40);
-            this.categoryComboBox.StateCommon.ComboBox.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.categoryComboBox.StateCommon.ComboBox.Border.Rounding = 20;
-            this.categoryComboBox.StateCommon.ComboBox.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.categoryComboBox.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.categoryComboBox.StateCommon.ComboBox.Content.Padding = new System.Windows.Forms.Padding(20, 5, 5, 5);
-            this.categoryComboBox.StateCommon.DropBack.Color1 = System.Drawing.Color.White;
-            this.categoryComboBox.TabIndex = 39;
-            this.categoryComboBox.SelectionChangeCommitted += new System.EventHandler(this.categoryComboBox_SelectionChangeCommitted);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(45, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(253, 44);
+            this.label1.TabIndex = 40;
+            this.label1.Text = "Kelola Produk";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // ProductForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(221)))), ((int)(((byte)(191)))));
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.ClientSize = new System.Drawing.Size(938, 753);
             this.Controls.Add(this.categoryComboBox);
             this.Controls.Add(this.quantityBox);
@@ -370,13 +368,10 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(94)))), ((int)(((byte)(117)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ProductForm";
-            this.Text = "ProductForm";
             this.Load += new System.EventHandler(this.ProductForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.productDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoryComboBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,7 +379,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private ComponentFactory.Krypton.Toolkit.KryptonComboBox categoryComboBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox quantityBox;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox priceBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView productDataGrid;
         private ComponentFactory.Krypton.Toolkit.KryptonButton hapusBtn;
         private ComponentFactory.Krypton.Toolkit.KryptonButton ubahBtn;
@@ -394,10 +393,6 @@
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox idBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox quantityBox;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox priceBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private ComponentFactory.Krypton.Toolkit.KryptonComboBox categoryComboBox;
+        private System.Windows.Forms.Label label1;
     }
 }

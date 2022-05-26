@@ -2,30 +2,22 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ComponentFactory.Krypton.Toolkit;
 
 namespace Klola
 {
-    public partial class SellerForm : KryptonForm
+    public partial class SellerForm : Klola.DatabaseManagementForm
     {
-        DatabaseConnection connection = new DatabaseConnection();
         public SellerForm()
         {
             InitializeComponent();
         }
-
         private void getTable()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand("SELECT * FROM Seller", connection.getConnection()));
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            sellerDataGrid.DataSource = table;
+            sellerDataGrid.DataSource = getDataTable("SELECT * FROM SELLER");
         }
 
         private void SellerForm_Load(object sender, EventArgs e)
@@ -33,30 +25,17 @@ namespace Klola
             getTable();
         }
 
-        private void clear()
-        {
-            idBox.Clear();
-            nameBox.Clear();
-            ageBox.Clear();
-            phoneBox.Clear();
-            passwordBox.Clear();
-            genderBox.SelectedIndex = 0;
-        }
-
         private void tambahBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                string query = "INSERT INTO Seller VALUES('" + idBox.Text + "','" + nameBox.Text
-                    + "','" + genderBox.Text + "'," + ageBox.Text + ",'" + phoneBox.Text + "','"
-                    + passwordBox.Text + "')";
-                SqlCommand command = new SqlCommand(query, connection.getConnection());
-                connection.openConnection();
-                command.ExecuteNonQuery();
-                MessageBox.Show("Penjual berhasil ditambahkan!", "Add Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                connection.closeConnection();
-                getTable();
-                clear();
+                if (validateInputs())
+                {
+                    string query = "INSERT INTO Seller VALUES('" + idBox.Text + "','" + nameBox.Text
+                        + "','" + genderBox.Text + "'," + ageBox.Text + ",'" + phoneBox.Text + "','"
+                        + passwordBox.Text + "')";
+                    updateTable(query, "Penjual berhasil ditambahkan!");
+                }
             }
             catch (Exception ex)
             {
@@ -64,33 +43,16 @@ namespace Klola
             }
         }
 
-        private Boolean isComplete()
-        {
-            if (idBox.Text == "" || nameBox.Text == "" || ageBox.Text == "" || phoneBox.Text == "" || genderBox.Text == "" || passwordBox.Text == "")
-                return false;
-            return true;
-        }
-
         private void ubahBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                if (!isComplete())
-                {
-                    MessageBox.Show("Informasi tidak lengkap!", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
+                if (validateInputs())
                 {
                     string query = "UPDATE Seller SET SellerName='" + nameBox.Text + "',SellerGender='" + genderBox.Text +
                         "',SellerAge=" + ageBox.Text + ",SellerPhone='" + phoneBox.Text + "',SellerPassword='" + passwordBox.Text
                         + "'WHERE SellerId LIKE '" + idBox.Text + "'";
-                    SqlCommand command = new SqlCommand(query, connection.getConnection());
-                    connection.openConnection();
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Penjual berhasil diperbarui!", "Update Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    connection.closeConnection();
-                    getTable();
-                    clear();
+                    updateTable(query, "Penjual berhasil diubah!");
                 }
             }
             catch (Exception ex)
@@ -111,20 +73,38 @@ namespace Klola
                 else
                 {
                     string query = "DELETE FROM Seller WHERE SellerId LIKE '" + idBox.Text + "'";
-                    SqlCommand command = new SqlCommand(query, connection.getConnection());
-                    connection.openConnection();
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Penjual berhasil dihapus!", "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    connection.closeConnection();
-                    getTable();
-                    clear();
+                    updateTable(query, "Penjual berhasil dihapus!");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
+        }
+
+        private void updateTable(string query, string message)
+        {
+            updateData(query);
+            MessageBox.Show(message, "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            getTable();
+            clear();
+        }
+
+        private void clear()
+        {
+            idBox.Clear();
+            nameBox.Clear();
+            ageBox.Clear();
+            phoneBox.Clear();
+            passwordBox.Clear();
+            genderBox.SelectedIndex = 0;
+        }
+
+        private void genderBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string query = "SELECT * FROM Seller WHERE SellerGender LIKE '" +
+               genderBox.SelectedItem.ToString() + "'";
+            sellerDataGrid.DataSource = getDataTable(query);
         }
 
         private void sellerDataGrid_Click(object sender, EventArgs e)
@@ -137,7 +117,94 @@ namespace Klola
                 ageBox.Text = sellerDataGrid.SelectedRows[0].Cells[3].Value.ToString();
                 phoneBox.Text = sellerDataGrid.SelectedRows[0].Cells[4].Value.ToString();
                 passwordBox.Text = sellerDataGrid.SelectedRows[0].Cells[5].Value.ToString();
-            } catch { }
+            }
+            catch { }
+        }
+
+        private Boolean isComplete()
+        {
+            if (idBox.Text == "" || nameBox.Text == "" || ageBox.Text == "" || phoneBox.Text == "" || genderBox.Text == "" || passwordBox.Text == "")
+                return false;
+            return true;
+        }
+        private Boolean validateId()
+        {
+            if (idBox.Text.Length != 4 || idBox.Text.First() != 'S')
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validateName()
+        {
+            if (nameBox.Text.Length < 3 || nameBox.Text.Length > 20)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validateGender()
+        {
+            if (genderBox.SelectedIndex < 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validateAge()
+        {
+            if (Int32.Parse(ageBox.Text) < 17)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validatePhone()
+        {
+            if (phoneBox.Text.Length > 13)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validateInputs()
+        {
+            if (!isComplete())
+            {
+                MessageBox.Show("Informasi tidak lengkap!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validateId())
+            {
+                MessageBox.Show("ID penjual harus terdiri dari huruf 'S' diikuti dengan 3 angka. Contoh : S001", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validateName())
+            {
+                MessageBox.Show("Nama penjual harus memiliki 3 - 20 karakter!", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validateGender())
+            {
+                MessageBox.Show("Jenis kelamin penjual tidak boleh kosong!", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validateAge())
+            {
+                MessageBox.Show("Umur penjual harus lebih dari 17!", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validatePhone())
+            {
+                MessageBox.Show("Nomor telepon penjual tidak boleh memiliki lebih dari 13 digit angka!", "Wrong Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
         }
     }
 }

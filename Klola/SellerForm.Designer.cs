@@ -30,6 +30,8 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.passwordBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.genderBox = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.phoneBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.ageBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -45,11 +47,35 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.passwordBox = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.genderBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellerDataGrid)).BeginInit();
             this.SuspendLayout();
+            // 
+            // passwordBox
+            // 
+            this.passwordBox.Location = new System.Drawing.Point(663, 220);
+            this.passwordBox.Name = "passwordBox";
+            this.passwordBox.Size = new System.Drawing.Size(220, 40);
+            this.passwordBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.passwordBox.StateCommon.Border.Rounding = 20;
+            this.passwordBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.passwordBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
+            this.passwordBox.TabIndex = 73;
+            this.passwordBox.Tag = "";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(475, 229);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(108, 27);
+            this.label7.TabIndex = 72;
+            this.label7.Text = "Password";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // genderBox
             // 
@@ -71,7 +97,8 @@
             this.genderBox.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.genderBox.StateCommon.ComboBox.Content.Padding = new System.Windows.Forms.Padding(20, 5, 5, 5);
             this.genderBox.StateCommon.DropBack.Color1 = System.Drawing.Color.White;
-            this.genderBox.TabIndex = 54;
+            this.genderBox.TabIndex = 71;
+            this.genderBox.SelectionChangeCommitted += new System.EventHandler(this.genderBox_SelectionChangeCommitted);
             // 
             // phoneBox
             // 
@@ -85,7 +112,7 @@
             this.phoneBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.phoneBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.phoneBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.phoneBox.TabIndex = 53;
+            this.phoneBox.TabIndex = 70;
             this.phoneBox.Tag = "";
             // 
             // ageBox
@@ -100,7 +127,7 @@
             this.ageBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ageBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ageBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.ageBox.TabIndex = 52;
+            this.ageBox.TabIndex = 69;
             this.ageBox.Tag = "";
             // 
             // label5
@@ -110,7 +137,7 @@
             this.label5.Location = new System.Drawing.Point(475, 177);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(171, 27);
-            this.label5.TabIndex = 51;
+            this.label5.TabIndex = 68;
             this.label5.Text = "Nomor Telepon";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -121,7 +148,7 @@
             this.label6.Location = new System.Drawing.Point(475, 124);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 27);
-            this.label6.TabIndex = 50;
+            this.label6.TabIndex = 67;
             this.label6.Text = "Umur";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -153,7 +180,7 @@
             this.sellerDataGrid.RowHeadersWidth = 51;
             this.sellerDataGrid.RowTemplate.Height = 24;
             this.sellerDataGrid.Size = new System.Drawing.Size(839, 331);
-            this.sellerDataGrid.TabIndex = 49;
+            this.sellerDataGrid.TabIndex = 66;
             this.sellerDataGrid.Click += new System.EventHandler(this.sellerDataGrid_Click);
             // 
             // hapusBtn
@@ -193,7 +220,7 @@
             this.hapusBtn.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.hapusBtn.TabIndex = 48;
+            this.hapusBtn.TabIndex = 65;
             this.hapusBtn.Values.Text = "Hapus";
             this.hapusBtn.Click += new System.EventHandler(this.hapusBtn_Click);
             // 
@@ -234,7 +261,7 @@
             this.ubahBtn.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.ubahBtn.TabIndex = 47;
+            this.ubahBtn.TabIndex = 64;
             this.ubahBtn.Values.Text = "Ubah";
             this.ubahBtn.Click += new System.EventHandler(this.ubahBtn_Click);
             // 
@@ -275,7 +302,7 @@
             this.tambahBtn.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.tambahBtn.TabIndex = 46;
+            this.tambahBtn.TabIndex = 63;
             this.tambahBtn.Values.Text = "Tambahkan";
             this.tambahBtn.Click += new System.EventHandler(this.tambahBtn_Click);
             // 
@@ -286,7 +313,7 @@
             this.label4.Location = new System.Drawing.Point(48, 229);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(151, 27);
-            this.label4.TabIndex = 45;
+            this.label4.TabIndex = 62;
             this.label4.Text = "Jenis Kelamin";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -302,7 +329,7 @@
             this.nameBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.nameBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.nameBox.TabIndex = 44;
+            this.nameBox.TabIndex = 61;
             this.nameBox.Tag = "";
             // 
             // idBox
@@ -317,7 +344,7 @@
             this.idBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.idBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.idBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.idBox.TabIndex = 43;
+            this.idBox.TabIndex = 60;
             this.idBox.Tag = "";
             // 
             // label3
@@ -327,7 +354,7 @@
             this.label3.Location = new System.Drawing.Point(48, 177);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(165, 27);
-            this.label3.TabIndex = 42;
+            this.label3.TabIndex = 59;
             this.label3.Text = "Nama Lengkap";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -338,7 +365,7 @@
             this.label2.Location = new System.Drawing.Point(48, 124);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(140, 27);
-            this.label2.TabIndex = 41;
+            this.label2.TabIndex = 58;
             this.label2.Text = "ID Karyawan";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
@@ -349,41 +376,13 @@
             this.label1.Location = new System.Drawing.Point(45, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(294, 44);
-            this.label1.TabIndex = 40;
+            this.label1.TabIndex = 57;
             this.label1.Text = "Kelola Karyawan";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // passwordBox
-            // 
-            this.passwordBox.Location = new System.Drawing.Point(663, 220);
-            this.passwordBox.Name = "passwordBox";
-            this.passwordBox.Size = new System.Drawing.Size(220, 40);
-            this.passwordBox.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.passwordBox.StateCommon.Border.Rounding = 20;
-            this.passwordBox.StateCommon.Content.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.passwordBox.StateCommon.Content.Font = new System.Drawing.Font("Microsoft JhengHei", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordBox.StateCommon.Content.Padding = new System.Windows.Forms.Padding(5, 1, 5, 1);
-            this.passwordBox.TabIndex = 56;
-            this.passwordBox.Tag = "";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(475, 229);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(108, 27);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "Password";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // SellerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(221)))), ((int)(((byte)(191)))));
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.ClientSize = new System.Drawing.Size(938, 753);
             this.Controls.Add(this.passwordBox);
             this.Controls.Add(this.label7);
@@ -402,10 +401,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(94)))), ((int)(((byte)(117)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SellerForm";
-            this.Text = "SellerForm";
             this.Load += new System.EventHandler(this.SellerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.genderBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellerDataGrid)).EndInit();
@@ -416,6 +412,8 @@
 
         #endregion
 
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox passwordBox;
+        private System.Windows.Forms.Label label7;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox genderBox;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox phoneBox;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox ageBox;
@@ -431,7 +429,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox passwordBox;
-        private System.Windows.Forms.Label label7;
     }
 }

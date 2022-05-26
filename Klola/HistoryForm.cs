@@ -2,37 +2,29 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DGVPrinterHelper;
 
 namespace Klola
 {
-    public partial class HistoryForm : Form
+    public partial class HistoryForm : Klola.DatabaseManagementForm
     {
-        DatabaseConnection connection = new DatabaseConnection();
-        DGVPrinter printer = new DGVPrinter();
+        private DGVPrinter printer = new DGVPrinter();
 
         public HistoryForm()
         {
             InitializeComponent();
         }
-
         private void HistoryForm_Load(object sender, EventArgs e)
         {
-            getTransactionTable();
+            getTable();
         }
 
-        private void getTransactionTable()
+        protected void getTable()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand("SELECT * FROM Bill", connection.getConnection()));
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            historyDataGrid.DataSource = table;
+            historyDataGrid.DataSource = getDataTable("SELECT * FROM Bill");
         }
 
         private void eksporBtn_Click(object sender, EventArgs e)

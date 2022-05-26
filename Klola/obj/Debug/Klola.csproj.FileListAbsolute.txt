@@ -1,11 +1,6 @@
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\Klola.exe.config
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\Klola.exe
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\Klola.pdb
-C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Docking.dll
-C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Navigator.dll
-C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Ribbon.dll
-C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
-C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Workspace.dll
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\FontAwesome.Sharp.dll
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Docking.pdb
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Navigator.pdb
@@ -26,5 +21,13 @@ C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.ProductForm.resources
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.SellerForm.resources
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.HistoryForm.resources
-C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.NonAdminForm.resources
 C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.TransactionForm.resources
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Docking.dll
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Navigator.dll
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Ribbon.dll
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\bin\Debug\ComponentFactory.Krypton.Workspace.dll
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.SplashForm.resources
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.UserForm.resources
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.NonAdminForm.resources
+C:\Users\emanu\Documents\Kuliah\SEMESTER 4\PATTERN SOFTWARE DESIGN\Final project\Klola\obj\Debug\Klola.DatabaseManagementForm.resources

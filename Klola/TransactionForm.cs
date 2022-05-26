@@ -5,18 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace Klola
 {
-    public partial class TransactionForm : Form
+    public partial class TransactionForm : Klola.DatabaseManagementForm
     {
         private int grandTotal;
         private int nRow = 0;
-        DatabaseConnection connection = new DatabaseConnection();
-
         public TransactionForm()
         {
             InitializeComponent();
@@ -32,32 +28,17 @@ namespace Klola
         private void initializeForm()
         {
             transactionDate.Text = DateTime.Today.ToShortDateString();
-            sellerName.Text = getSellerName();
-        }
-
-        private string getSellerName()
-        {
-            SqlCommand command = new SqlCommand("SELECT SellerName FROM Seller WHERE SellerId LIKE 'S001'"
-                , connection.getConnection());
-            connection.openConnection();
-
-            return command.ExecuteScalar().ToString();
+            sellerName.Text = getDataString("SELECT SellerName FROM Seller WHERE SellerId LIKE '" + LoginForm.sellerId + "'");
         }
 
         private void getProductTable()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand("SELECT ProductName, ProductPrice FROM Product", connection.getConnection()));
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            productDataGrid.DataSource = table;
+            productDataGrid.DataSource = getDataTable("SELECT ProductName, ProductPrice FROM Product");
         }
 
         private void getCategory()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(new SqlCommand("SELECT * FROM Category", connection.getConnection()));
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            categoryComboBox.DataSource = table;
+            categoryComboBox.DataSource = getDataTable("SELECT * FROM Category");
             categoryComboBox.ValueMember = "CategoryName";
         }
 
@@ -76,29 +57,18 @@ namespace Klola
             string query = "SELECT ProductName, ProductPrice FROM Product JOIN Category ON " +
                 "Category.CategoryId = Product.CategoryId WHERE Product.CategoryId LIKE '"
                 + getCategoryId(categoryComboBox.SelectedValue.ToString()) + "'";
-            SqlCommand command = new SqlCommand(query, connection.getConnection());
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            productDataGrid.DataSource = table;
+            productDataGrid.DataSource = getDataTable(query);
         }
 
         public string getCategoryId(string name)
         {
-            SqlCommand command = new SqlCommand("SELECT CategoryId FROM Category WHERE CategoryName LIKE '"
-                + name + "'", connection.getConnection());
-            connection.openConnection();
-
-            return command.ExecuteScalar().ToString();
+            return getDataString("SELECT CategoryId FROM Category WHERE CategoryName LIKE '"
+                + name + "'");
         }
 
         private void tambahBtn_Click(object sender, EventArgs e)
         {
-            if (nameBox.Text == "" || qtyBox.Text == "" || priceBox.Text == "")
-            {
-                MessageBox.Show("Informasi tidak lengkap!", "Information Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
+            if (validateInputs())
             {
                 int totalPrice = Convert.ToInt32(priceBox.Text) * Convert.ToInt32(qtyBox.Text);
                 DataGridViewRow row = new DataGridViewRow();
@@ -116,9 +86,32 @@ namespace Klola
 
         private void hapusBtn_Click(object sender, EventArgs e)
         {
+            deleteTransaction();
+        }
+
+        private void checkoutBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (validateCheckout())
+                {
+                    string query = "INSERT INTO Bill VALUES('" + billBox.Text + "','" + DateTime.Today.Year + '-'
+                        + DateTime.Today.Month + '-' + DateTime.Today.Day + "','" +
+                        LoginForm.sellerId + "'," + grandTotal.ToString() + ")";
+                    updateTable(query, "Transaksi berhasil ditambahkan!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void deleteTransaction()
+        {
             while (transactionDataGrid.Rows.Count != 0)
             {
-                transactionDataGrid.Rows.RemoveAt(0); 
+                transactionDataGrid.Rows.RemoveAt(0);
             }
 
             nRow = 0;
@@ -126,23 +119,127 @@ namespace Klola
             totalLabel.Text = "Rp. " + grandTotal;
         }
 
-        private void checkoutBtn_Click(object sender, EventArgs e)
+        private void updateTable(string query, string message)
+        {
+            updateData(query);
+            MessageBox.Show(message, "Delete Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            deleteTransaction();
+        }
+
+        private Boolean isComplete()
+        {
+            if (categoryComboBox.SelectedIndex < 0 || nameBox.Text == "" || priceBox.Text == "" || qtyBox.Text == "")
+                return false;
+            return true;
+        }
+
+        private Boolean validateCategory()
+        {
+            if (categoryComboBox.SelectedIndex < 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validateName()
+        {
+            if (nameBox.Text.Length < 3 || nameBox.Text.Length > 20)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean validatePrice()
         {
             try
             {
-                string insertQuery = "INSERT INTO Bill VALUES('" + billBox.Text + "','" + DateTime.Today.Year + '-'
-                    + DateTime.Today.Month + '-' + DateTime.Today.Day + "','" +
-                    LoginForm.sellerId + "'," + grandTotal.ToString() + ")";
-                SqlCommand command = new SqlCommand(insertQuery, connection.getConnection());
-                connection.openConnection();
-                command.ExecuteNonQuery();
-                MessageBox.Show("Bill berhasil ditambahkan!", "Order Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                connection.closeConnection();
+                if (Int32.Parse(priceBox.Text) < 0)
+                {
+                    return false;
+                }
+                return true;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+                return false;
             }
+        }
+
+        private Boolean validateQuantity()
+        {
+            try
+            {
+                if (Int32.Parse(qtyBox.Text) < 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private Boolean validateInputs()
+        {
+            if (!isComplete())
+            {
+                MessageBox.Show("Informasi tidak lengkap!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validateName())
+            {
+                MessageBox.Show("Nama produk harus memiliki 3 - 20 karakter!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validateCategory())
+            {
+                MessageBox.Show("Kategori tidak boleh kosong!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validatePrice())
+            {
+                MessageBox.Show("Harga produk harus berupa angka positif!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!validateQuantity())
+            {
+                MessageBox.Show("Jumlah produk harus berupa angka positif!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!productExist())
+            {
+                MessageBox.Show("Informasi produk tidak ada/sesuai!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean productExist()
+        {
+            if ((nameBox.Text == getDataString("SELECT productName FROM Product WHERE productName LIKE '"
+                + nameBox.Text + "'")) && (priceBox.Text == getDataString("SELECT productPrice FROM Product " +
+                "WHERE productName LIKE '" + nameBox.Text + "'")))
+                return true;
+            return false;
+        }
+
+        private Boolean validateCheckout()
+        {
+            if (billBox.Text.Length != 4 || billBox.Text.First() != 'B')
+            {
+                MessageBox.Show("ID bill harus terdiri dari huruf 'B' diikuti dengan 3 angka. Contoh : B001", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (transactionDataGrid.Rows.Count <= 0)
+            {
+                MessageBox.Show("Tidak ada produk untuk checkout!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
         }
     }
 }
